@@ -1,0 +1,14 @@
+/* Add styles for the QR code container */
+#qrcode {
+    position: absolute;	
+	top:400px;
+	left: 1050px;
+
+}
+
+@media print {
+    #qrcode {
+        display: none;
+  
+    }
+}

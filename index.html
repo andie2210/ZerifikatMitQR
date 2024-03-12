@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>Zertifikat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="qrstyle.css">      
+    <script type="text/javascript" src="ptpdf.js"></script>
+    <script>
+        window.onload = insertName();
+    </script>
+</head>
+
+<body>
+    <div id="section-to-print" class="certificate" >
+        <h1>Zertifikat</h1>
+        <p class="p1">Dieses Zertifikat wird verliehen an</p>              
+        <p class="p4"><b><script>doc(name)</script></b></p>        
+        <p class="p2">am</p>
+        <p class="name">01.01.2024</p>
+        <p class="p3">für das erfolgreiche Absolvieren aller IT-Workshops <br> 
+            am Tag der offenen Tür an der HTL Mödling.
+        </p>
+        <img src=".\abz.png" width="200" height="250";>
+    </div>
+    <a onclick="print()">PDF drucken</a>
+     <!-- Include qrcode.js -->
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+<!-- Create a container for the QR code -->
+<div align="center" id="qrcode"></div>
+
+<script>
+    // Get the current page URL
+    const currentPageUrl = window.location.href;
+
+    // Create the QR code
+    const qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: currentPageUrl,
+        width: 128,
+        height: 128,
+    });
+</script>
+
+</body>
+
+</html>

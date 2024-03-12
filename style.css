@@ -1,0 +1,136 @@
+
+body {
+
+  background-image:url(it-security-cyber.x80668c64.webp);
+  margin: 0;
+  padding: 0;  
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  
+  
+}
+
+.certificate {	
+
+  width: 21cm;
+  height: 29.7cm;  
+  border: 15px double #204986;  
+  margin-left: 185px;
+  margin-bottom: 80px;
+  text-align: center;  
+  background-image: url(design_2.jpg);
+  background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+}
+:root {
+	color-scheme: light only;
+	position: relative;	
+	top: 60px;	
+	font-size: 50px;
+	font-family: 'Comic Sans MS';
+}
+
+p {
+	position: relative;
+	font-size: 25px;
+}
+
+p.name {
+	position: relative;
+	top: 20px;		
+	font-size: 40px;
+	border-bottom: 2px black; 
+	color: #204986;
+	
+}
+
+h1 {
+	position: relative;
+	top: 50px;
+	font-size: 100px;
+	font-variant: small-caps;
+	color: #204986;
+}
+
+img {
+	position: relative;
+	top: 125px;
+}
+a {
+	position: absolute;
+	color:antiquewhite;
+	top:0;
+	left: 1200px;
+}
+p.p4 {
+	position:relative;
+	top:40px;
+	font-size: 40px;
+}
+@media print {
+    .certificate {
+		background-image: url(design_2.jpg);
+		-webkit-print-color-adjust: exact !important;   /* Chrome, Safari 6 – 15.3, Edge */
+		color-adjust: exact !important;                 /* Firefox 48 – 96 */
+		print-color-adjust: exact !important;           /* Firefox 97+, Safari 15.4+ */
+        height: 95%;
+        width: 94%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 18px;
+		
+    }
+	:root {
+		color-scheme: light only;
+		position: relative;	
+		top: 300px;	
+		font-size: 150px;
+		font-family: 'Comic Sans MS';
+	}
+	img {
+		position: relative;
+		top: 600px;
+	}
+	p.name {
+		position: relative;
+		top: 400px;		
+		font-size: 40px;
+		border-bottom: 2px black; 
+		color: #204986;
+		
+	}	
+	h1 {
+		position: relative;
+		top: 50px;
+		font-size: 120px;
+		font-variant: small-caps;
+		color: #204986;
+	}	
+	p.p1 {
+		position: relative;
+		top:150px;
+		font-size: 50px;
+	}
+	p.p2 {
+		position:relative;
+		top:400px;
+		font-size:80;
+	}
+	p.p3 {
+		position:relative;
+		top:500px;
+		font-size:100;
+		line-height: 3pc;
+	}
+	p.p4 {
+		position:relative;
+		top:200px;
+		font-size: 80px;
+	}
+	
+}
