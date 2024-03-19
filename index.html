@@ -34,7 +34,7 @@
 
 <script>
     // Get the current page URL
-    const currentPageUrl = window.location.href + print();
+    const currentPageUrl = window.location.href + '?print=true';
 
     // Create the QR code
     const qrcode = new QRCode(document.getElementById("qrcode"), {
