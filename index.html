@@ -9,18 +9,48 @@
     <link rel="stylesheet" href="qrstyle.css">      
     <script type="text/javascript" src="ptpdf.js"></script>
           <script>
-    // Generate QR code for the PDF URL
-       const pdfUrl = 'your-pdf-filename.pdf'; // Replace with the actual PDF filename
-        const qrContainer = document.getElementById('qrCodeContainer');
-        new QRCode(qrContainer, pdfUrl);
+   <script function() PdfQR {
+       const express = require('express');
+const puppeteer = require('puppeteer');
+const qr = require('qrcode');
+const fs = require('fs');
 
-    // Append the QR code to the page
-    document.body.appendChild(qrContainer);
-</script>
+const app = express();
+
+// Serve HTML page for visitors to choose design and enter name
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+// Generate PDF and QR code
+app.post('/generate', async (req, res) => {
+  // Generate PDF
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto('http://localhost:3000', {waitUntil: 'networkidle0'});
+  const pdfBuffer = await page.pdf({ format: 'A4' });
+  await browser.close();
+
+  // Save PDF on server
+  fs.writeFileSync('certificate.pdf', pdfBuffer);
+
+  // Generate QR code
+  const qrCodeURL = 'http://localhost:3000/certificate.pdf';
+  const qrCodeImage = await qr.toDataURL(qrCodeURL);
+
+  res.json({ qrCode: qrCodeImage });
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+
+   }
+              
     <script>
         window.onload = insertName();
     </script>
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+   
 </head>
 
 <body>
@@ -35,19 +65,10 @@
         </p>
         <img src=".\abz.png" width="200" height="250";>
     </div>
-    <a onclick="print()">PDF drucken</a>
+    <a onclick="PdfQR()">PDF Link</a>
+   
 
-
-     <button onclick="generatePDF()">Generate PDF</button>
-    <div id="qrCodeContainer"></div>
-
-    <script>
-        function generatePDF() {
-            window.print();
-             location.reload();
-        }
-    </script>
-  
+   
 
 </body>
 
