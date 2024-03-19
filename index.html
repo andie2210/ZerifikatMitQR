@@ -25,7 +25,7 @@
         </p>
         <img src=".\abz.png" width="200" height="250";>
     </div>
-    <a onclick="print()">PDF drucken</a>
+    <a href="#" onclick="printPDF()">PDF drucken</a>
      <!-- Include qrcode.js -->
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
@@ -33,12 +33,23 @@
 <div align="center" id="qrcode"></div>
 
 <script>
-    // Get the current page URL
-    const currentPageUrl = window.location.href + '?print=true';
+    function printPDF() {
+        window.print();
+    }
 
-    // Create the QR code
-    const qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: currentPageUrl,
+    // Function to get the URL of the print view
+    function getPrintViewURL() {
+        // Construct the URL of the print view
+        var printViewURL = window.location.href + '?print=true';
+        return printViewURL;
+    }
+
+    // Get the URL of the print view
+    var printViewURL = getPrintViewURL();
+
+    // Create the QR code for the print view URL
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: printViewURL,
         width: 128,
         height: 128,
     });
