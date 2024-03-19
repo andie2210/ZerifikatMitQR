@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zertifikat</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="qrstyle.css">      
+    <link rel="stylesheet" href="style.css">       
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <style>
         #qr-code {
@@ -21,7 +20,7 @@
             var printContent = document.getElementById('section-to-print').outerHTML;
             printWindow.document.write('<html><head><title>Zertifikat</title></head><body>');
             printWindow.document.write(printContent);
-            printWindow.document.write('<script>window.onload = function() { window.print(); }</script>');
+            printWindow.document.write('<script>window.onload = function() { window.print(); }');
             printWindow.document.write('</body></html>');
             
             // Generate and display QR code
