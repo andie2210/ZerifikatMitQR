@@ -10,9 +10,9 @@
     <script type="text/javascript" src="ptpdf.js"></script>
           <script>
     // Generate QR code for the PDF URL
-    const pdfUrl = 'your-pdf-filename.pdf'; // Replace with the actual PDF filename
-    const qrContainer = document.createElement('div');
-    new QRCode(qrContainer, pdfUrl);
+       const pdfUrl = 'your-pdf-filename.pdf'; // Replace with the actual PDF filename
+        const qrContainer = document.getElementById('qrCodeContainer');
+        new QRCode(qrContainer, pdfUrl);
 
     // Append the QR code to the page
     document.body.appendChild(qrContainer);
@@ -39,10 +39,12 @@
 
 
      <button onclick="generatePDF()">Generate PDF</button>
+    <div id="qrCodeContainer"></div>
 
     <script>
         function generatePDF() {
             window.print();
+             location.reload();
         }
     </script>
   
