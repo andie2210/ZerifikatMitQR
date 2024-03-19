@@ -3,62 +3,59 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport">
     <title>Zertifikat</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="qrstyle.css">      
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-    <style>
-        #qr-code {
-           
-            margin: 20px auto;
-        }
-    </style>
+    <script type="text/javascript" src="ptpdf.js"></script>
     <script>
-        function showPrintView() {
-            // Open a new window with the print-friendly view
-            var printWindow = window.open('', '_blank');
-            var printContent = document.getElementById('section-to-print').outerHTML;
-            printWindow.document.write('<html><head><title>Zertifikat</title></head><body>');
-            printWindow.document.write('<style>body { background-image: url(./abz.png); }</style>'); // Preserve background image
-            printWindow.document.write(printContent);
-            printWindow.document.write('<script>window.onload = function() { window.print(); };'); 
-            printWindow.document.write('</body></html>');
-            
-            // Generate and display QR code
-            generateQRCode();
-        }
-
-        function generateQRCode() {
-            var qrCodeURL = window.location.href + '?print=true';
-            var qrCode = new QRCode(document.getElementById('qr-code'), {
-                text: qrCodeURL,
-                width: 128,
-                height: 128,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-            document.getElementById('qr-code').style.display = 'block'; // Show the QR code div
-        }
+        window.onload = insertName();
     </script>
 </head>
 
 <body>
-    <div id="section-to-print" class="certificate">
+    <div id="section-to-print" class="certificate" >
         <h1>Zertifikat</h1>
         <p class="p1">Dieses Zertifikat wird verliehen an</p>              
-        <p class="p4"><b>John Doe</b></p> <!-- Replace 'John Doe' with the actual name -->
+        <p class="p4"><b><script>doc(name)</script></b></p>        
         <p class="p2">am</p>
         <p class="name">01.01.2024</p>
         <p class="p3">für das erfolgreiche Absolvieren aller IT-Workshops <br> 
             am Tag der offenen Tür an der HTL Mödling.
         </p>
-        <img src=".\abz.png" width="200" height="250">
+        <img src=".\abz.png" width="200" height="250";>
     </div>
-    <div id="qr-code"></div>
-    <button onclick="showPrintView()">Show Print View</button>
-    
+    <a onclick="print()">PDF drucken</a>
+
+    <!-- Include qrcode.js -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+    <!-- Create a container for the QR code -->
+    <div align="center" id="qrcode"></div>
+
+    <script>
+        // Function to open print dialog
+        function print() {
+            window.print();
+        }
+
+        // Function to get print view URL
+        function getPrintViewURL() {
+            // Construct the URL of the print view
+            var printViewURL = window.location.href + '?print=true';
+            return printViewURL;
+        }
+
+        // Get the URL of the print view
+        var printViewURL = getPrintViewURL();
+
+        // Create the QR code for the print view URL
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: printViewURL,
+            width: 128,
+            height: 128,
+        });
+    </script>
 </body>
 
 </html>
