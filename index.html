@@ -8,68 +8,52 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="qrstyle.css">      
     <script type="text/javascript" src="ptpdf.js"></script>
-          <script>
-   <script function() PdfQR {
-       const express = require('express');
-const puppeteer = require('puppeteer');
-const qr = require('qrcode');
-const fs = require('fs');
-
-const app = express();
-
-// Serve HTML page for visitors to choose design and enter name
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-
-// Generate PDF and QR code
-app.post('/generate', async (req, res) => {
-  // Generate PDF
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('http://localhost:3000', {waitUntil: 'networkidle0'});
-  const pdfBuffer = await page.pdf({ format: 'A4' });
-  await browser.close();
-
-  // Save PDF on server
-  fs.writeFileSync('certificate.pdf', pdfBuffer);
-
-  // Generate QR code
-  const qrCodeURL = 'http://localhost:3000/certificate.pdf';
-  const qrCodeImage = await qr.toDataURL(qrCodeURL);
-
-  res.json({ qrCode: qrCodeImage });
-});
-
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
-
-   }
-              
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <script>
-        window.onload = insertName();
+        function generatePDFandQR() {
+            // Make an AJAX request to trigger server-side PDF generation and QR code creation
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/generate', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        // Display QR code
+                        var qrCodeImage = document.createElement('img');
+                        qrCodeImage.src = response.qrCode;
+                        document.body.appendChild(qrCodeImage);
+                    } else {
+                        console.error('Error generating PDF and QR code');
+                    }
+                }
+            };
+            xhr.send();
+        }
     </script>
-   
+    <script>
+        window.onload = function() {
+            // Function to insert name
+            var nameElement = document.querySelector('.p4');
+            nameElement.innerText = 'John Doe'; // Replace 'John Doe' with the actual name
+        };
+    </script>
 </head>
 
 <body>
-    <div id="section-to-print" class="certificate" >
+    <div id="section-to-print" class="certificate">
         <h1>Zertifikat</h1>
         <p class="p1">Dieses Zertifikat wird verliehen an</p>              
-        <p class="p4"><b><script>doc(name)</script></b></p>        
+        <p class="p4"><b></b></p> <!-- Name will be inserted here -->
         <p class="p2">am</p>
         <p class="name">01.01.2024</p>
         <p class="p3">für das erfolgreiche Absolvieren aller IT-Workshops <br> 
             am Tag der offenen Tür an der HTL Mödling.
         </p>
-        <img src=".\abz.png" width="200" height="250";>
+        <img src=".\abz.png" width="200" height="250">
     </div>
-    <a onclick="PdfQR()">PDF Link</a>
-   
-
-   
-
+    <button onclick="generatePDFandQR()">Generate PDF and QR</button>
 </body>
 
 </html>
+
