@@ -3,48 +3,46 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zertifikat</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="qrstyle.css">      
-    <script type="text/javascript" src="ptpdf.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <script>
-        function generatePDFandQR() {
-            // Make an AJAX request to trigger server-side PDF generation and QR code creation
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/generate', true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        // Display QR code
-                        var qrCodeImage = document.createElement('img');
-                        qrCodeImage.src = response.qrCode;
-                        document.body.appendChild(qrCodeImage);
-                    } else {
-                        console.error('Error generating PDF and QR code');
-                    }
-                }
-            };
-            xhr.send();
+        function showPrintView() {
+            // Open a new window with the print-friendly view
+            var printWindow = window.open('', '_blank');
+            var printContent = document.getElementById('section-to-print').outerHTML;
+            printWindow.document.write('<html><head><title>Zertifikat</title></head><body>');
+            printWindow.document.write(printContent);
+            printWindow.document.write('<script>window.onload = function() { window.print(); }</script>');
+            printWindow.document.write('</body></html>');
+
+            // Generate QR code for the print view URL
+            var qrCodeURL = window.location.href + '?print=true';
+            var qrCode = new QRCode(document.getElementById('qr-code'), {
+                text: qrCodeURL,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
         }
     </script>
-    <script>
-        window.onload = function() {
-            // Function to insert name
-            var nameElement = document.querySelector('.p4');
-            nameElement.innerText = 'John Doe'; // Replace 'John Doe' with the actual name
-        };
-    </script>
+    <style>
+        #qr-code {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
 </head>
 
 <body>
     <div id="section-to-print" class="certificate">
         <h1>Zertifikat</h1>
         <p class="p1">Dieses Zertifikat wird verliehen an</p>              
-        <p class="p4"><b></b></p> <!-- Name will be inserted here -->
+        <p class="p4"><b>John Doe</b></p> <!-- Replace 'John Doe' with the actual name -->
         <p class="p2">am</p>
         <p class="name">01.01.2024</p>
         <p class="p3">für das erfolgreiche Absolvieren aller IT-Workshops <br> 
@@ -52,8 +50,8 @@
         </p>
         <img src=".\abz.png" width="200" height="250">
     </div>
-    <button onclick="generatePDFandQR()">Generate PDF and QR</button>
+    <button onclick="showPrintView()">Show Print View</button>
+    <div id="qr-code"></div>
 </body>
 
 </html>
-
