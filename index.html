@@ -11,6 +11,7 @@
     <script>
         window.onload = insertName();
     </script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </head>
 
 <body>
@@ -26,23 +27,13 @@
         <img src=".\abz.png" width="200" height="250";>
     </div>
     <a onclick="print()">PDF drucken</a>
-     <!-- Include qrcode.js -->
-<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+     <button onclick="generatePDF()">Generate PDF</button>
 
-<!-- Create a container for the QR code -->
-<div align="center" id="qrcode"></div>
-
-<script>
-    // Get the current page URL
-    const currentPageUrl = window.location.href;
-
-    // Create the QR code
-    const qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: currentPageUrl,
-        width: 128,
-        height: 128,
-    });
-</script>
+    <script>
+        function generatePDF() {
+            window.print();
+        }
+    </script>
 
 </body>
 
