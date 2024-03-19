@@ -7,14 +7,17 @@
     <title>Zertifikat</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="qrstyle.css">      
-
+    <script type="text/javascript" src="ptpdf.js"></script>
+    <script>
+        window.onload = insertName();
+    </script>
 </head>
 
 <body>
     <div id="section-to-print" class="certificate" >
         <h1>Zertifikat</h1>
         <p class="p1">Dieses Zertifikat wird verliehen an</p>              
-        <p class="p4"><b></b></p>        
+        <p class="p4"><b><script>doc(name)</script></b></p>        
         <p class="p2">am</p>
         <p class="name">01.01.2024</p>
         <p class="p3">für das erfolgreiche Absolvieren aller IT-Workshops <br> 
@@ -22,33 +25,25 @@
         </p>
         <img src=".\abz.png" width="200" height="250";>
     </div>
-   
+    <a onclick="print()">PDF drucken</a>
+     <!-- Include qrcode.js -->
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
-    <!-- Include qrcode.js -->
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<!-- Create a container for the QR code -->
+<div align="center" id="qrcode"></div>
 
-    <!-- Create a container for the QR code -->
-    <div align="center" id="qrcode"></div>
+<script>
+    // Get the current page URL
+    const currentPageUrl = window.location.href + print();
 
-    <script>
-      
-        // Function to get print view URL
-        function getPrintViewURL() {
-            // Construct the URL of the print view
-            var printViewURL = window.location.href + window.print();
-            return printViewURL;
-        }
+    // Create the QR code
+    const qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: currentPageUrl,
+        width: 128,
+        height: 128,
+    });
+</script>
 
-        // Get the URL of the print view
-        var printViewURL = getPrintViewURL();
-
-        // Create the QR code for the print view URL
-        var qrcode = new QRCode(document.getElementById("qrcode"), {
-            text: printViewURL,
-            width: 128,
-            height: 128,
-        });
-    </script>
 </body>
 
 </html>
