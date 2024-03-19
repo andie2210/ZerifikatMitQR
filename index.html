@@ -5,8 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zertifikat</title>
-    <link rel="stylesheet" href="style.css">     
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="qrstyle.css">      
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <style>
+        #qr-code {
+            display: none; /* Hide initially */
+            margin: 20px auto;
+        }
+    </style>
     <script>
         function showPrintView() {
             // Open a new window with the print-friendly view
@@ -34,12 +41,6 @@
             document.getElementById('qr-code').style.display = 'block'; // Show the QR code div
         }
     </script>
-    <style>
-        #qr-code {
-            display: none; /* Hide initially */
-            margin: 20px auto;
-        }
-    </style>
 </head>
 
 <body>
